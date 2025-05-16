@@ -21,7 +21,6 @@ GREEN = (0, 255, 0)
 MAROON = (128, 0, 0)
 
 def get_grid_coordinates(pos):
-    """Convert mouse position to grid coordinates."""
     x, y = pos
     if MARGIN <= x < MARGIN + BOARD_WIDTH * CELL_SIZE:
         grid_x = (x - MARGIN) // CELL_SIZE
@@ -126,15 +125,12 @@ class Ship:
 
 def print_board(board, coordinate=False):
     if coordinate:
-        # Print x-axis labels
         print("   " + " ".join(f"{x:2}" for x in range(len(board[0]))))
 
     for y, row in enumerate(board):
         if coordinate:
-            # Print y-axis labels along with the row
             print(f"{y:2} " + " ".join(f"{cell:2}" for cell in row))
         else:
-            # Print the row without y-axis labels
             print(" ".join(f"{cell:2}" for cell in row))
     print("\n")
 
@@ -179,17 +175,16 @@ def main():
                     CELL_SIZE,
                     CELL_SIZE)
                 if enemy_hit_board[y][x] == " H":
-                    color = RED  # Enemy ship hit
+                    color = RED
                 elif enemy_hit_board[y][x] == " M":
-                    color = GRAY  # Missed shot
+                    color = GRAY
                 elif enemy_hit_board[y][x] == " X":
-                    color = MAROON  # Missed shot
+                    color = MAROON
                 else:
-                    color = BLUE  # Water (ships are hidden)
+                    color = BLUE
                 pygame.draw.rect(screen, color, rect)
-                pygame.draw.rect(screen, WHITE, rect, 1)  # Border
+                pygame.draw.rect(screen, WHITE, rect, 1)
 
-            # Draw the computer board
         for y in range(BOARD_HEIGHT):
             for x in range(BOARD_WIDTH):
                 rect = pygame.Rect(
@@ -211,7 +206,7 @@ def main():
                     color = MAROON
 
                 pygame.draw.rect(screen, color, rect)
-                pygame.draw.rect(screen, WHITE, rect, 1)  # Border
+                pygame.draw.rect(screen, WHITE, rect, 1)
 
         pygame.display.flip()
 
